@@ -1,4 +1,4 @@
-FROM phusion/baseimage
+FROM phusion/baseimage:0.10.2
 
 RUN rm -f /etc/service/sshd/down
 RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
@@ -9,7 +9,13 @@ RUN apt update
 RUN apt install apache2 -y
 RUN debconf-set-selections /tmp/mysql-passwd && apt install mysql-server -y
 RUN rm -rf /tmp/mysql-passwd
+
+RUN echo php -v # 5
+# RUN add-apt-repository ppa:ondrej/php
+# RUN apt-get install php5.6-mcrypt
 RUN apt install php libapache2-mod-php php-mcrypt php-mysql php-gd -y
+# RUN pecl channel-update pecl.php.net
+# RUN pecl install mcrypt-1.0.1
 
 ADD init_db.sh /tmp/init_db.sh
 RUN chmod u+x /tmp/init_db.sh

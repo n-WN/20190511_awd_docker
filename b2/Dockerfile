@@ -1,4 +1,4 @@
-FROM phusion/baseimage
+FROM phusion/baseimage:jammy-1.0.3
 
 RUN rm -f /etc/service/sshd/down
 RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
@@ -11,12 +11,12 @@ RUN apt install python3 -y
 RUN curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
 RUN python3 /tmp/get-pip.py
 
-RUN pip3 install Flask
-RUN pip3 install flask_sqlalchemy
-RUN pip3 install flask_bcrypt
-RUN pip3 install flask_login
-RUN pip3 install flask_mail
-RUN pip3 install flask_wtf
+RUN pip3 install Flask==1.0.3
+RUN pip3 install flask_sqlalchemy==2.4.0
+RUN pip3 install flask_bcrypt==0.7.1
+RUN pip3 install flask_login==0.4.1
+RUN pip3 install flask_mail==0.9.1
+RUN pip3 install flask_wtf==0.14.2
 RUN pip3 install pyyaml==3.12
 
 ADD ./default /etc/nginx/sites-enabled/
