@@ -1,1 +1,9 @@
 b1/exp.py
+
+# py
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
