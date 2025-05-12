@@ -1,7 +1,6 @@
 # 20190511_awd_docker
 
-[<img src="https://api.gitsponsors.com/api/badge/img?id=186425396" height="20">](https://api.gitsponsors.com/api/badge/link?p=eKPIakxNFNqN/MxGXBNUbdtPM/8H0y5xTsKihqUGr4EHJSmjTeCEiu4tljVNA6FB)
-
+> 2025 更新 Dockerfile 配置, 使得可以在今天运行
 
 ## 说明
 
