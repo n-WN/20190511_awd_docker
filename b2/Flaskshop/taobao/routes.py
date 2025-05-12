@@ -754,7 +754,7 @@ def supplier_account(username):
         abort(403)
     supplier = Supplier.query.filter_by(id=current_user.table_id).first_or_404()
     if supplier.supplier_name == "尚未填写":
-        flash("请尽快完整你的“商家名称”等信息，完整之后将恢复正常，不用担心！","warning")
+        flash('请尽快完整你的`商家名称`等信息，完整之后将恢复正常，不用担心！',"warning")
         return redirect(url_for("update_supplier_info"))
     return render_template("supplier_account.html", username=username)
 
@@ -917,7 +917,7 @@ def crew_account(username):
         abort(403)
     crew = Crew.query.filter_by(id=current_user.table_id).first_or_404()
     if crew.crew_name == "尚未填写"or crew.massage == "这个人很懒，什么也没有写。":
-        flash("请你先尽快填好你的“正式名称和求职宣言”,更新之后将恢复正常，不用担心", "warning")
+        flash('请你先尽快填好你的"正式名称和求职宣言",更新之后将恢复正常，不用担心', "warning")
         return redirect(url_for("update_crew_info"))
 
     crew = Crew.query.filter_by(id=current_user.table_id).first()
@@ -987,13 +987,13 @@ def customer_check_supplier_products(id):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    template = '''
-        {%% block body %%}
+    from flask import request, render_template_string
+    # 直接拼接用户输入到模板字符串，形成真正的SSTI
+    template = f'''
         <div class="center-content error">
         <h1>哇哦，This page doesn't exist.</h1>
-        <h3>%s</h3>
+        <h3>{request.path}</h3>
         <h3>这里什么都没有呢٩(๑❛ᴗ❛๑)۶</h3>
         </div>
-        {%% endblock %%}
-        ''' % (request.url)
+    '''
     return render_template_string(template), 404
